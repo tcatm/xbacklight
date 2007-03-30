@@ -44,8 +44,13 @@ Sets each backlight brightness to the specified level.
 Increases brightness by the specified amount.
 .IP "-dec \fIpercent\fP"
 Decreases brightness by the specified amount.
-.IP --help
+.IP -help
 Print out a summary of the usage and exit.
+.IP "-time \fImilliseconds\fP"
+Length of time to spend fading the backlight between old and new value.
+Default is 200.
+.IP "-steps \fInumber\fP"
+Number of steps to take while faiding. Default is 20.
 .SH "SEE ALSO"
 Xrandr(3)
 .SH AUTHORS

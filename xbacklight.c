@@ -21,6 +21,8 @@ usage (void)
     fprintf(stderr, "  -inc <percentage> or + <percentage>\n");
     fprintf(stderr, "  -dec <percentage> or - <percentage>\n");
     fprintf(stderr, "  -get\n");
+    fprintf(stderr, "  -time <fade time in milliseconds>\n");
+    fprintf(stderr, "  -steps <number of steps in fade>\n");
     /*NOTREACHED*/
     exit (1);
 }
@@ -65,6 +67,8 @@ main (int argc, char **argv)
     op_t    op = Get;
     int	    value = 0;
     int	    i;
+    int	    total_time = 200;	/* ms */
+    int	    steps = 20;
 
     program_name = argv[0];
 
@@ -120,10 +124,23 @@ main (int argc, char **argv)
 	    op = Get;
 	    continue;
 	}
+	if (!strcmp (argv[i], "-time"))
+	{
+	    if (++i >= argc) usage();
+	    total_time = atoi (argv[i]);
+	    continue;
+	}
+	if (!strcmp (argv[i], "-steps"))
+	{
+	    if (++i >= argc) usage();
+	    steps = atoi (argv[i]);
+	    continue;
+	}
 	if (!strcmp (argv[i], "-help") || !strcmp (argv[i], "-?"))
 	{
 	    usage ();
 	}
+	usage ();
     }
     dpy = XOpenDisplay (dpy_name);
     if (!dpy)
@@ -190,16 +207,16 @@ main (int argc, char **argv)
 			    }
 			    if (new > max) new = max;
 			    if (new < min) new = min;
-			    step = (new - cur) / 50;
-			    for (i = 0; i < 50; i++)
+			    step = (new - cur) / steps;
+			    for (i = 0; i < steps && step != 0; i++)
 			    {
-				if (i == 49)
+				if (i == steps - 1)
 				    cur = new;
 				else
 				    cur += step;
 				backlight_set (dpy, output, (long) cur);
 				XFlush (dpy);
-				usleep (10 * 1000);
+				usleep (total_time * 1000 / steps);
 			    }
 			}
 		    }
