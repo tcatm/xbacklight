@@ -36,7 +36,7 @@ appmandir = $(APP_MAN_DIR)
 
 appman_DATA = $(appman_PRE:man=@APP_MAN_SUFFIX@)
 
-EXTRA_DIST = $(appman_PRE)
+EXTRA_DIST = $(appman_PRE) COPYING
 CLEANFILES = $(appman_DATA)
 
 SED = sed
