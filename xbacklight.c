@@ -25,6 +25,10 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrandr.h>
 
+#include <ctype.h>
+#include <string.h>
+#include <unistd.h>
+
 typedef enum { Get, Set, Inc, Dec } op_t;
 
 static char *program_name;
@@ -225,6 +229,9 @@ main (int argc, char **argv)
 			    case Dec:
 				new = cur - set;
 				break;
+			    default:
+				XSync (dpy, False);
+				return 1;
 			    }
 			    if (new > max) new = max;
 			    if (new < min) new = min;
@@ -249,4 +256,6 @@ main (int argc, char **argv)
 	XRRFreeScreenResources (resources);
     }
     XSync (dpy, False);
+
+    return 0;
 }
