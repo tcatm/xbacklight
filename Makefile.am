@@ -23,7 +23,7 @@ AUTOMAKE_OPTIONS = foreign
 
 bin_PROGRAMS = xbacklight
 
-AM_CFLAGS = $(XRANDR_CFLAGS)
+AM_CFLAGS = $(CWARNFLAGS) $(XRANDR_CFLAGS)
 xbacklight_LDADD = $(XRANDR_LIBS)
 
 xbacklight_SOURCES =	\
