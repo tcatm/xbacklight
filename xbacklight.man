@@ -52,7 +52,7 @@ Default is 200.
 .IP "-steps \fInumber\fP"
 Number of steps to take while fading. Default is 20.
 .SH "SEE ALSO"
-Xrandr(3)
+Xrandr(__libmansuffix__)
 .SH AUTHORS
 Keith Packard,
 Open Source Technology Center, Intel Corporation.
