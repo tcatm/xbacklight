@@ -37,7 +37,7 @@ XORG_DEFAULT_OPTIONS
 AC_CONFIG_HEADERS([config.h])
 
 # Checks for pkg-config packages
-PKG_CHECK_MODULES(XRANDR, xrandr >= 1.2.0 x11)
+PKG_CHECK_MODULES(XRANDR, [xcb-randr >= 1.2 xcb-atom xcb-aux xcb])
 
 AC_CONFIG_FILES([
 	Makefile
