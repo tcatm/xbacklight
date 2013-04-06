@@ -87,7 +87,7 @@ backlight_get (xcb_connection_t *conn, xcb_randr_output_t output)
 	prop_reply->format != 32) {
 	value = -1;
     } else {
-	value = *((long *) xcb_randr_get_output_property_data (prop_reply));
+	value = *((int32_t *) xcb_randr_get_output_property_data (prop_reply));
     }
 
     free (prop_reply);
