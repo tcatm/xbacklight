@@ -40,17 +40,16 @@ static xcb_atom_t backlight, backlight_new, backlight_legacy;
 static void
 usage (void)
 {
-    fprintf(stderr, "usage: %s [options]\n", program_name);
-    fprintf(stderr, "  where options are:\n");
-    fprintf(stderr, "  -display <display> or -d <display>\n");
-    fprintf(stderr, "  -help\n");
-    fprintf(stderr, "  -set <percentage> or = <percentage>\n");
-    fprintf(stderr, "  -inc <percentage> or + <percentage>\n");
-    fprintf(stderr, "  -dec <percentage> or - <percentage>\n");
-    fprintf(stderr, "  -get\n");
-    fprintf(stderr, "  -time <fade time in milliseconds>\n");
-    fprintf(stderr, "  -steps <number of steps in fade>\n");
-    /*NOTREACHED*/
+    fprintf(stderr, "usage: %s [options]\n%s", program_name,
+            "  where options are:\n"
+            "  -display <display> or -d <display>\n"
+            "  -help\n"
+            "  -set <percentage> or = <percentage>\n"
+            "  -inc <percentage> or + <percentage>\n"
+            "  -dec <percentage> or - <percentage>\n"
+            "  -get\n"
+            "  -time <fade time in milliseconds>\n"
+            "  -steps <number of steps in fade>\n");
     exit (1);
 }
 
