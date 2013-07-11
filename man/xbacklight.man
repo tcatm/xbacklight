@@ -24,32 +24,32 @@
 xbacklight \- adjust backlight brightness using RandR extension
 .SH SYNOPSIS
 .B "xbacklight"
-[-help]  [-display \fIdisplay\fP]
-[-get]
-[-set percent]
-[-inc percent]
-[-dec percent]
+[\-help]  [\-display \fIdisplay\fP]
+[\-get]
+[\-set percent]
+[\-inc percent]
+[\-dec percent]
 .SH DESCRIPTION
 .I Xbacklight
 is used to adjust the backlight brightness where supported. It finds all
 outputs on the X server supporting backlight brightness control and changes
 them all in the same way.
-.IP -get
+.IP \-get
 Print out the current backlight brightness of each output with such a
 control. The brightness is represented as a percentage of the maximum
 brightness supported.
-.IP "-set \fIpercent\fP"
+.IP "\-set \fIpercent\fP"
 Sets each backlight brightness to the specified level.
-.IP "-inc \fIpercent\fP"
+.IP "\-inc \fIpercent\fP"
 Increases brightness by the specified amount.
-.IP "-dec \fIpercent\fP"
+.IP "\-dec \fIpercent\fP"
 Decreases brightness by the specified amount.
-.IP -help
+.IP \-help
 Print out a summary of the usage and exit.
-.IP "-time \fImilliseconds\fP"
+.IP "\-time \fImilliseconds\fP"
 Length of time to spend fading the backlight between old and new value.
 Default is 200.
-.IP "-steps \fInumber\fP"
+.IP "\-steps \fInumber\fP"
 Number of steps to take while fading. Default is 20.
 .SH "SEE ALSO"
 Xrandr(__libmansuffix__)
