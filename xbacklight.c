@@ -19,6 +19,11 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE
  * OF THIS SOFTWARE.
  */
+
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -44,6 +49,7 @@ usage (int exitcode)
             "  where options are:\n"
             "  -display <display> or -d <display>\n"
             "  -help\n"
+            "  -version\n"
             "  -set <percentage> or = <percentage>\n"
             "  -inc <percentage> or + <percentage>\n"
             "  -dec <percentage> or - <percentage>\n"
@@ -199,6 +205,11 @@ main (int argc, char **argv)
 	if (!strcmp (argv[i], "-help") || !strcmp (argv[i], "-?"))
 	{
 	    usage (0);
+	}
+	if (!strcmp (argv[i], "-version"))
+	{
+	    puts (PACKAGE_STRING);
+	    exit (0);
 	}
 	fprintf(stderr, "%s: unrecognized argument '%s'\n",
 		program_name, argv[i]);
