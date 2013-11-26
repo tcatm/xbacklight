@@ -38,7 +38,7 @@ static char *program_name;
 static xcb_atom_t backlight, backlight_new, backlight_legacy;
 
 static void
-usage (void)
+usage (int exitcode)
 {
     fprintf(stderr, "usage: %s [options]\n%s", program_name,
             "  where options are:\n"
@@ -50,7 +50,14 @@ usage (void)
             "  -get\n"
             "  -time <fade time in milliseconds>\n"
             "  -steps <number of steps in fade>\n");
-    exit (1);
+    exit (exitcode);
+}
+
+static void
+missing_arg (const char *option)
+{
+    fprintf(stderr, "%s: %s requires an argument\n", program_name, option);
+    usage(1);
 }
 
 static long
@@ -129,13 +136,13 @@ main (int argc, char **argv)
     {
 	if (!strcmp (argv[i], "-display") || !strcmp ("-d", argv[i]))
 	{
-	    if (++i >= argc) usage();
+	    if (++i >= argc) missing_arg (argv[i-1]);
 	    dpy_name = argv[i];
 	    continue;
 	}
 	if (!strcmp (argv[i], "-set") || !strcmp (argv[i], "="))
 	{
-	    if (++i >= argc) usage();
+	    if (++i >= argc) missing_arg (argv[i-1]);
 	    op = Set;
 	    value = atoi (argv[i]);
 	    continue;
@@ -148,7 +155,7 @@ main (int argc, char **argv)
 	}
 	if (!strcmp (argv[i], "-inc") || !strcmp (argv[i], "+"))
 	{
-	    if (++i >= argc) usage();
+	    if (++i >= argc) missing_arg (argv[i-1]);
 	    op = Inc;
 	    value = atoi (argv[i]);
 	    continue;
@@ -161,7 +168,7 @@ main (int argc, char **argv)
 	}
 	if (!strcmp (argv[i], "-dec") || !strcmp (argv[i], "-"))
 	{
-	    if (++i >= argc) usage();
+	    if (++i >= argc) missing_arg (argv[i-1]);
 	    op = Dec;
 	    value = atoi (argv[i]);
 	    continue;
@@ -179,21 +186,23 @@ main (int argc, char **argv)
 	}
 	if (!strcmp (argv[i], "-time"))
 	{
-	    if (++i >= argc) usage();
+	    if (++i >= argc) missing_arg (argv[i-1]);
 	    total_time = atoi (argv[i]);
 	    continue;
 	}
 	if (!strcmp (argv[i], "-steps"))
 	{
-	    if (++i >= argc) usage();
+	    if (++i >= argc) missing_arg (argv[i-1]);
 	    steps = atoi (argv[i]);
 	    continue;
 	}
 	if (!strcmp (argv[i], "-help") || !strcmp (argv[i], "-?"))
 	{
-	    usage ();
+	    usage (0);
 	}
-	usage ();
+	fprintf(stderr, "%s: unrecognized argument '%s'\n",
+		program_name, argv[i]);
+	usage (1);
     }
     conn = xcb_connect (dpy_name, NULL);
     ver_cookie = xcb_randr_query_version (conn, 1, 2);
