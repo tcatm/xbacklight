@@ -265,18 +265,18 @@ main (int argc, char **argv)
 	xcb_window_t root = screen->root;
 	xcb_randr_output_t *outputs;
 
-	xcb_randr_get_screen_resources_cookie_t resources_cookie;
-	xcb_randr_get_screen_resources_reply_t *resources_reply;
+	xcb_randr_get_screen_resources_current_cookie_t resources_cookie;
+	xcb_randr_get_screen_resources_current_reply_t *resources_reply;
 
-	resources_cookie = xcb_randr_get_screen_resources (conn, root);
-	resources_reply = xcb_randr_get_screen_resources_reply (conn, resources_cookie, &error);
+	resources_cookie = xcb_randr_get_screen_resources_current (conn, root);
+	resources_reply = xcb_randr_get_screen_resources_current_reply (conn, resources_cookie, &error);
 	if (error != NULL || resources_reply == NULL) {
 	    int ec = error ? error->error_code : -1;
 	    fprintf (stderr, "RANDR Get Screen Resources returned error %d\n", ec);
 	    continue;
 	}
 
-	outputs = xcb_randr_get_screen_resources_outputs (resources_reply);
+	outputs = xcb_randr_get_screen_resources_current_outputs (resources_reply);
 	for (int o = 0; o < resources_reply->num_outputs; o++)
 	{
 	    xcb_randr_output_t output = outputs[o];
