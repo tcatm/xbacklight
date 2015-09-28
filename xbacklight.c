@@ -120,7 +120,7 @@ main (int argc, char **argv)
 {
     char    *dpy_name = NULL;
     op_t    op = Get;
-    int	    value = 0;
+    double  value = 0;
     int	    i;
     int	    total_time = 200;	/* ms */
     int	    steps = 20;
@@ -150,39 +150,39 @@ main (int argc, char **argv)
 	{
 	    if (++i >= argc) missing_arg (argv[i-1]);
 	    op = Set;
-	    value = atoi (argv[i]);
+	    value = atof (argv[i]);
 	    continue;
 	}
 	if (argv[i][0] == '=' && isdigit (argv[i][1]))
 	{
 	    op = Set;
-	    value = atoi (argv[i] + 1);
+	    value = atof (argv[i] + 1);
 	    continue;
 	}
 	if (!strcmp (argv[i], "-inc") || !strcmp (argv[i], "+"))
 	{
 	    if (++i >= argc) missing_arg (argv[i-1]);
 	    op = Inc;
-	    value = atoi (argv[i]);
+	    value = atof (argv[i]);
 	    continue;
 	}
 	if (argv[i][0] == '+' && isdigit (argv[i][1]))
 	{
 	    op = Inc;
-	    value = atoi (argv[i] + 1);
+	    value = atof (argv[i] + 1);
 	    continue;
 	}
 	if (!strcmp (argv[i], "-dec") || !strcmp (argv[i], "-"))
 	{
 	    if (++i >= argc) missing_arg (argv[i-1]);
 	    op = Dec;
-	    value = atoi (argv[i]);
+	    value = atof (argv[i]);
 	    continue;
 	}
 	if (argv[i][0] == '-' && isdigit (argv[i][1]))
 	{
 	    op = Dec;
-	    value = atoi (argv[i] + 1);
+	    value = atof (argv[i] + 1);
 	    continue;
 	}
 	if (!strcmp (argv[i], "-get") || !strcmp (argv[i], "-g"))
